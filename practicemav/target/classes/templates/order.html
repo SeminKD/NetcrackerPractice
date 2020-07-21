@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Orders</title>
+</head>
+<style type="text/css">
+    TABLE {
+        width: 300px; /* Ширина таблицы */
+        border-collapse: collapse; /* Убираем двойные линии между ячейками */
+    }
+    TD, TH {
+        padding: 3px; /* Поля вокруг содержимого таблицы */
+        border: 1px solid black; /* Параметры рамки */
+    }
+    TH {
+        background: #b0e0e6; /* Цвет фона */
+    }
+</style>
+<body bgcolor="#FFEFD5">
+<div th:switch="${orders}">
+    <h2 th:case="null">No orders found!</h2>
+    <div th:case="*">
+        <h2>Orders</h2>
+        <table>
+            <thead>
+            <tr>
+                <th width="20%" >Order_id</th>
+                <th width="20%" >Order_time</th>
+                <th width="20%" >Exhibition</th>
+                <th width="20%" >Amount</th>
+                <th width="20%" >Order_price</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="order:${orders}">
+                <td align="center" width="20%" th:text="${order.order_id}"></td>
+                <td align="center" width="20%" th:text="${order.order_time}"></td>
+                <td align="center" width="20%" th:text="${order.ex_name}"></td>
+                <td align="center" width="20%" th:text="${order.amount}"></td>
+                <td align="center" width="20%" th:text="${order.order_price}"></td>
+                <td><a th:href="@{order-delete/{id}(id=${order.order_id})}">Delete</a></td>
+                <td><a th:href="@{order-edit/{id}(id=${order.order_id})}">Edit</a></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <p><a href="/add-order">Add order</a></p>
+</div>
+<form th:action="@{/logout}" method="post">
+    <input type="submit" value="Sign Out"/>
+</form>
+</body>
+</html>

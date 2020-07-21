@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Add order</title>
+</head>
+<style>
+    p {
+        margin-top: 0.5em; /* Отступ сверху */
+        margin-bottom: 1em; /* Отступ снизу */
+    }
+</style>
+<body bgcolor="#FFEFD5">
+<h1>Enter your data to create an order</h1>
+<form action="#" th:action="@{/add-order}" method="post">
+    <label> Ex_name : </label>
+    <select th:name="ex_name">
+        <option th:each="ex:${exs}" th:value="${ex.ex_name}" th:text="${ex.ex_name}"></option>
+    </select>
+    <p>
+    <div><label> Amount : <input type="number" th:name="amount" required/> </label></div>
+    <p><div><input type="submit" value="Add"></div>
+</form>
+</body>
+</html>
